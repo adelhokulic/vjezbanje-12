@@ -7,17 +7,27 @@ export const initialUserData = {
 export const getUserInitialData = () => {
 	const userData = localStorage.getItem("userData");
 
-	return userData ? JSON.parse(userData) : initialUserData;
+	if (!userData) {
+		return initialUserData;
+	}
+
+	try {
+		return JSON.parse(userData);
+	} catch (error) {
+		localStorage.removeItem("userData");
+		return initialUserData;
+	}
 };
 
 export const userReducer = (state, action) => {
 	switch (action.type) {
-		case "SET_USERNAME":
-			return { ...state, username: action.payload };
-		case "SET_IS_LOGEDIN":
-			return { ...state, isLoggedIn: action.payload };
-		case "SET_LOGIN_TIME":
-			return { ...state, loginTime: action.payload };
+		case "LOGIN":
+			return {
+				...state,
+				username: action.payload.username,
+				loginTime: action.payload.loginTime,
+				isLoggedIn: true,
+			};
 		default:
 			return state;
 	}

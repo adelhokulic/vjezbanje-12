@@ -36,9 +36,13 @@ const Login = () => {
 			setLoginError("Nismo pronašli korisnika sa unijetim kredencijalima");
 		} else {
 			setLoginError("");
-			userDispatch({ type: "SET_USERNAME", payload: username });
-			userDispatch({ type: "SET_IS_LOGEDIN", payload: true });
-			userDispatch({ type: "SET_LOGIN_TIME", payload: new Date().getTime() });
+			userDispatch({
+				type: "LOGIN",
+				payload: {
+					username: username,
+					loginTime: new Date().getTime(),
+				},
+			});
 		}
 	};
 
