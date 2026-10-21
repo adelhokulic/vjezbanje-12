@@ -17,12 +17,7 @@ const Login = () => {
 	const { userState, userDispatch } = useContext(UserContext);
 
 	const checkUserExists = () => {
-		if (
-			username.trim() === "" ||
-			password.trim() === "" ||
-			username === null ||
-			password === null
-		) {
+		if (username.trim() === "" || password.trim() === "") {
 			setLoginError("Niste unijeli potrebne kredencijale");
 			return;
 		}
